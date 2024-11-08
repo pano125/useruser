@@ -6,84 +6,52 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Тестирование задач</title>
   <style>
-    /* НЕАКТИВНЫЕ ПОЛЬЗОВАТЕЛИ */
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    height: 100vh;
-    background-color: #ffffff;
-    font-family: 'Roboto', sans-serif; /* Изменено на Roboto */
-}
-.button {
-            height: 40px; /* Высота кнопки */
-            padding: 0 20px; /* Горизонтальные отступы */
-            font-family: 'Roboto', sans-serif; /* Шрифт Roboto */
-            font-size: 14pt; /* Размер шрифта */
-            color: #ffffff; /* Цвет текста */
-            background-color: #222222; /* Цвет фона кнопки */
-            border: none; /* Убираем рамку */
-            border-radius: 5px; /* Скругление углов */
-            cursor: pointer; /* Курсор при наведении */
-            transition: background-color 0.3s; /* Плавный переход цвета при наведении */
-        }
-
-        .button:hover {
-            background-color: #444444; /* Цвет фона при наведении */
-        }
-
-/* Столбец слева на всю высоту */
-.sidebar {
-    width: 400px;
-    padding: 10px; /* Уменьшено с 20px до 10px */
-    background-color: #fff;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: 100vh; /* Полная высота */
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-}
-
-.sidebar h1 {
-    font-size: 18pt;
-    margin-bottom: 5px; /* Уменьшено с 0px до 5px для небольшого отступа */
-}
-
-.sidebar h2 {
-    font-size: 14pt;
-    margin-bottom: 0px; /* Уменьшено с 0px до 5px для небольшого отступа */
-}    
-
-.sidebar p {
-    font-size: 12pt;
-    color: #222;
-    margin-bottom: 0px; /* Добавлен небольшой отступ между абзацами */
-}
-
-/* Для интерактивного прототипа */
-.prototype-container {
-    position: sticky;
-    flex-grow: 1;
-    height: 100vh;
-    overflow: hidden;
-}
-
-    /* Для интерактивного прототипа */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      background-color: #ffffff;
+      font-family: 'Roboto', sans-serif;
+    }
+    .button {
+      height: 40px;
+      padding: 0 20px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14pt;
+      color: #ffffff;
+      background-color: #222222;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #444444;
+    }
+    .sidebar {
+      width: 400px;
+      padding: 10px;
+      background-color: #fff;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+    }
     .prototype-container {
       position: sticky;
       flex-grow: 1;
       height: 100vh;
       overflow: hidden;
     }
-
     iframe {
       border: none;
       width: 139%;
       height: 135%;
-      transform: scale(0.7); /* Масштабирование прототипа до 70% */
+      transform: scale(0.7);
       transform-origin: top left;
     }
-
     /* Прозрачная маска для перехвата кликов */
     .click-mask {
       position: absolute;
@@ -94,10 +62,19 @@ body {
       z-index: 10;
       pointer-events: none; /* Пропускает клики к iframe */
     }
+    /* Невидимая маска для отслеживания */
+    .invisible-mask {
+      position: fixed; /* Фиксированное позиционирование */
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background-color: rgba(255,255,255,0); /* Полностью прозрачная */
+      z-index: 20; /* Выше остальных элементов */
+    }
   </style>
 
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
+<script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -112,34 +89,37 @@ body {
    });
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/98857891" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const mask = document.createElement('div');
+    mask.classList.add('invisible-mask');
+    document.body.appendChild(mask);
+
+    setInterval(() => {
+        mask.style.display = 'block'; // Показываем маску
+        setTimeout(() => {
+            mask.style.display = 'none'; // Скрываем маску
+        }, 100); // Скрыть через 100 мс
+    }, 200); // Показать каждые 200 мс
+});
+</script>
 
 </head>
 <body>
 
-  <!-- Левый столбец -->
-  <div class="sidebar">
+<div class="sidebar">
     <h1>Спасибо, что согласились принять участие в онлайн-тестировании✨</h1>
     <p>Справа вы видите макет с небольшими изменениями в интерфейсе списка задач в Экстерне.</p>
-    <p></p>
     <h2>Задание-легенда:</h2>
     <h2>Представим, что Вы выполнили задачу «Сходить на обед в 13:00» и нужно отметить её завершение в Экстерне. Как будете действовать?</h2>
-    <p></p>
-    <p>🟠 Используйте макет и мышку для выполнения задания.</p>
-    <p>🟠 Наведите и кликните мышкой на тот элемент, где как вам кажется, нужно поставить отметку о выполнении.</p>
-    <p>🟠 После того, как выполните задание, поделитесь, пожалуйста, вашими впечатлениями в анкете. Это поможет нам узнать больше о вашем опыте при работе с задачами.</p>
-    <p></p>
-    <p></p>
     <button class="button" onclick="window.location.href='https://kontur.typeform.com/to/DnD7UfG7#user=xxxxx&keuserid=xxxxx';">Написать впечатления</button>
-  </div>
+</div>
 
-  <!-- Встроенный кликабельный прототип Figma -->
-  <div class="prototype-container">
+<div class="prototype-container">
     <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/AoBaUIKhWz2vWOIXpNFE6q/Untitled?page-id=0%3A1&node-id=0-4952&node-type=frame&viewport=410%2C319%2C0.17&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=0%3A4952&embed-host=share" allowfullscreen></iframe>
-    <!-- Прозрачная маска для сбора кликов -->
     <div class="click-mask"></div>
-  </div>
-
+</div>
 
 </body>
 </html>
