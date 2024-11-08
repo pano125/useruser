@@ -140,46 +140,6 @@ body {
     <div class="click-mask"></div>
   </div>
 
-  <script>
-    // Перехват события клика на маске и регистрация в Яндекс.Метрике
-    const clickMask = document.querySelector('.click-mask');
-    const iframe = document.getElementById('figma-prototype');
-
-    clickMask.addEventListener('click', function(e) {
-      // Логируем событие клика в Яндекс.Метрике
-      ym(98694303, 'reachGoal', 'prototype_click', {
-        x: e.clientX,
-        y: e.clientY
-      });
-
-      // Получение координат относительно iframe
-      const rect = iframe.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Имитация клика для передачи внутрь iframe
-      const clickEvent = new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-        clientX: x,
-        clientY: y
-      });
-
-      // Передаем клик внутрь прототипа
-      iframe.contentWindow.postMessage({ type: 'click', x, y }, '*');
-    });
-
-    // Обрабатываем сообщения, если необходимо взаимодействие с iframe
-    window.addEventListener('message', function(event) {
-      if (event.data && event.data.type === 'click') {
-        const simulatedClick = new MouseEvent('click', {
-          clientX: event.data.x,
-          clientY: event.data.y
-        });
-        iframe.dispatchEvent(simulatedClick);
-      }
-    });
-  </script>
 
 </body>
 </html>
