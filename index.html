@@ -123,18 +123,17 @@
         autoResizeTextarea(this);
     });
 
-    // Обработчик клика на контейнере прототипа
-    document.getElementById('prototypeContainer').addEventListener('click', function() {
-        const figmaUrl = "https://www.figma.com"; // URL Figma для открытия
-        window.open(figmaUrl, '_blank'); // Открытие Figma в новой вкладке
+// Обработчик клика на контейнере прототипа
+document.getElementById('prototypeContainer').addEventListener('click', function() {
+    const clientId = 'TqkR9qT9eladn3C4CNlnzO'; // Замените на ваш Client ID
+    const redirectUri = 'https://pano125.github.io/useruser/'; // Замените на ваш URL перенаправления
+    const scope = 'file_read'; // Запрашиваемый доступ
+    const figmaAuthUrl = `https://www.figma.com/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=code`;
 
-        // Запрос доступа к прототипам пользователя (это пример, реальный запрос зависит от API Figma)
-        const accessGranted = confirm("Предоставить доступ к прототипам?"); // Запрос доступа у пользователя
+    window.open(figmaAuthUrl, '_blank'); // Открытие страницы аутентификации Figma в новой вкладке
 
-        if (accessGranted) {
-            this.style.backgroundColor = "green"; // Изменение цвета контейнера на зеленый
-        }
-    });
+    // Здесь вам нужно будет реализовать логику для обработки кода авторизации
+});
     
 </script>
 
