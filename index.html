@@ -1,142 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Тестирование задач</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      height: 100vh;
-      background-color: #ffffff;
-      font-family: 'Roboto', sans-serif;
-    }
-    .button {
-      height: 40px;
-      padding: 0 20px;
-      font-family: 'Roboto', sans-serif;
-      font-size: 14pt;
-      color: #ffffff;
-      background-color: #222222;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .button:hover {
-      background-color: #444444;
-    }
-    .sidebar {
-      width: 400px;
-      padding: 10px;
-      background-color: #fff;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-    }
-    .prototype-container {
-      position: sticky;
-      flex-grow: 1;
-      height: 100vh;
-      overflow: hidden;
-    }
-    iframe {
-      border: none;
-      width: 139%;
-      height: 135%;
-      transform: scale(0.7);
-      transform-origin: top left;
-    }
-    /* Прозрачная маска для перехвата кликов */
-    .click-mask {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 10;
-      pointer-events: none; /* Пропускает клики к iframe */
-    }
-    /* Невидимая маска для отслеживания */
-    .invisible-mask {
-      position: fixed; /* Фиксированное позиционирование */
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%; 
-      background-color: rgba(255,255,255,0); /* Полностью прозрачная */
-      z-index: 20; /* Выше остальных элементов */
-    }
-      .clickmap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 30;
-      pointer-events: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма ввода</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!-- Подключение шрифта Roboto из Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Применение шрифта Roboto */
+            display: flex;
+            align-items: flex-start; /* Выравнивание по верхнему краю */
+            justify-content: flex-start; /* Выравнивание по левому краю */
+            height: 100vh;
+            padding: 32px; /* Отступы сверху и слева */
+            background-color: #ffffff;
+        }
 
- <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        .container {
+            width: 300px; /* Ширина контейнера */
+        }
 
-    ym(98857891, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-    });
-  </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/98857891" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        .input-field-title {
+            width: 100%;
+            padding: 8px;
+            font-size: 32pt; /* Размер текста для заголовка */
+            font-weight: 700;
+            border: 2px solid transparent; /* Скрытие границ по умолчанию */
+            outline: none; /* Убираем стандартное выделение */
+            transition: border-color 0.3s, box-shadow 0.3s; /* Плавный переход при наведении */
+            resize: none; /* Запрет изменения размера мышкой */
+            min-height: 50px; /* Минимальная высота поля заголовка */
+            overflow-y: auto; /* Появление полосы прокрутки при переполнении */
+            border-radius: 4px;
+        }
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const prototypeContainer = document.querySelector('.prototype-container');
-      const iframe = prototypeContainer.querySelector('iframe');
-      const clickmap = document.createElement('div');
-      clickmap.classList.add('clickmap');
-      prototypeContainer.appendChild(clickmap);
+        .input-field-title:hover {
+            border-color: #222222; /* Цвет границы при наведении */
+        }
 
-      clickmap.addEventListener('click', function(event) {
-        const rect = iframe.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        
-        // Отправка данных в Яндекс Метрику
-        ym(98857891, 'reachGoal', 'iframe_click', {
-          x: x,
-          y: y
-        });
+        .input-field-title::placeholder {
+            color: #aaa; /* Цвет плейсхолдера */
+        }
 
-        console.log('Клик по iframe:', x, y);
-      });
-    });
-  </script>
+        .input-field-description {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16pt; /* Размер текста для описания */
+            border: 2px solid transparent; /* Скрытие границ по умолчанию */
+            border-radius: 4px;
+            outline: none; /* Убираем стандартное выделение */
+            transition: border-color 0.3s, box-shadow 0.3s; /* Плавный переход при наведении */
+            resize: none; /* Запрет изменения размера мышкой */
+            min-height: 50px; /* Минимальная высота поля описания */
+            overflow-y: auto; /* Появление полосы прокрутки при переполнении */
+        }
+
+        .input-field-description:hover {
+            border-color: #222222; /* Цвет границы при наведении */
+        }
+
+        .input-field-description::placeholder {
+            color: #aaa; /* Цвет плейсхолдера */
+        }
+
+        .right-container {
+            flex-grow: 1; /* Позволяет контейнеру занимать оставшееся пространство */
+            margin-left: 56px; /* Отступ слева от правого контейнера */
+        } 
+        .prototype-container {
+            background-color: white; /* Белый фон контейнера прототипа */
+            border: 2px solid #D6D6D6; /* Черные границы контейнера прототипа */
+            height: calc(100vh - 80px); /* Высота контейнера (уменьшена на высоту формы) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .prototype-container:hover {
+            border-color: #222222; /* Цвет границы при наведении */
+        }         
+
+        .text-container {
+            font-size: 16pt; /* Размер текста в центре контейнера */
+        }                            
+    </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h1>111Спасибо, что согласились принять участие в онлайн-тестировании✨</h1>
-    <p>Справа вы видите макет с небольшими изменениями в интерфейсе списка задач в Экстерне.</p>
-    <h2>Задание-легенда:</h2>
-    <h2>Представим, что Вы выполнили задачу «Сходить на обед в 13:00» и нужно отметить её завершение в Экстерне. Как будете действовать?</h2>
-    <button class="button" onclick="window.location.href='https://kontur.typeform.com/to/DnD7UfG7#user=xxxxx&keuserid=xxxxx';">Написать впечатления</button>
+<div class="container">
+    <textarea class="input-field-title" placeholder="Заголовок"></textarea>
+    <textarea class="input-field-description" rows="5" placeholder="Описание задания"></textarea>
 </div>
 
-<div class="prototype-container">
-    <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/AoBaUIKhWz2vWOIXpNFE6q/Untitled?page-id=0%3A1&node-id=0-4952&node-type=frame&viewport=410%2C319%2C0.17&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=0%3A4952&embed-host=share" allowfullscreen></iframe>
-    <div class="click-mask"></div>
+<div class="right-container">
+    <div class="prototype-container" id="prototypeContainer">
+        <!-- Здесь вы можете вставить ваш прототип Figma -->
+        <div class="text-container">🔗 Привязать Фигму</div>
+    </div>
 </div>
+
+<script>
+    // Функция для автоматического изменения высоты текстового поля
+    function autoResizeTextarea(textarea) {
+        textarea.style.height = 'auto'; // Сброс высоты
+        textarea.style.height = textarea.scrollHeight + 'px'; // Установка высоты в соответствии с содержимым
+    }
+
+    // Получение элементов полей ввода
+    const titleField = document.querySelector('.input-field-title');
+    const descriptionField = document.querySelector('.input-field-description');
+
+    // Добавление обработчиков событий для автоматического изменения высоты
+    titleField.addEventListener('input', function() {
+        autoResizeTextarea(this);
+    });
+
+    descriptionField.addEventListener('input', function() {
+        autoResizeTextarea(this);
+    });
+
+    // Обработчик клика на контейнере прототипа
+    document.getElementById('prototypeContainer').addEventListener('click', function() {
+        const figmaUrl = "https://www.figma.com"; // URL Figma для открытия
+        window.open(figmaUrl, '_blank'); // Открытие Figma в новой вкладке
+
+        // Запрос доступа к прототипам пользователя (это пример, реальный запрос зависит от API Figma)
+        const accessGranted = confirm("Предоставить доступ к прототипам?"); // Запрос доступа у пользователя
+
+        if (accessGranted) {
+            this.style.backgroundColor = "green"; // Изменение цвета контейнера на зеленый
+        }
+    });
+    
+</script>
 
 </body>
 </html>
