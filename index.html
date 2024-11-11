@@ -126,7 +126,7 @@
 // Обработчик клика на контейнере прототипа
 document.getElementById('prototypeContainer').addEventListener('click', function() {
     const clientId = 'TqkR9qT9eladn3C4CNlnzO'; // Замените на ваш Client ID
-    const redirectUri = 'https://pano125.github.io/useruser/'; // Замените на ваш URL перенаправления
+    const redirectUri = 'https://pano125.github.io/useruser'; // Замените на ваш URL перенаправления
     const scope = 'file_read'; // Запрашиваемый доступ
     const state = Math.random().toString(36).substring(2); // Генерация случайного состояния
     const figmaAuthUrl = `https://www.figma.com/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=code&state=${state}`;
